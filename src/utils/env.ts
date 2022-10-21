@@ -10,6 +10,7 @@ export function getCommonStoragePrefix() {
 }
 
 // Generate cache key according to version
+// 根据版本生成缓存键
 export function getStorageShortName() {
   return `${getCommonStoragePrefix()}${`__${pkg.version}`}__`.toUpperCase();
 }
@@ -19,6 +20,7 @@ export function getAppEnvConfig() {
 
   const ENV = (import.meta.env.DEV
     ? // Get the global configuration (the configuration will be extracted independently when packaging)
+      // 获取全局配置(打包时将独立提取配置)
       (import.meta.env as unknown as GlobEnvConfig)
     : window[ENV_NAME as any]) as unknown as GlobEnvConfig;
 
@@ -56,7 +58,7 @@ export const devMode = 'development';
 export const prodMode = 'production';
 
 /**
- * @description: Get environment variables
+ * @description: Get environment variables 获取环境变量
  * @returns:
  * @example:
  */
@@ -65,7 +67,7 @@ export function getEnv(): string {
 }
 
 /**
- * @description: Is it a development mode
+ * @description: Is it a development mode 开发模式
  * @returns:
  * @example:
  */
@@ -74,7 +76,7 @@ export function isDevMode(): boolean {
 }
 
 /**
- * @description: Is it a production mode
+ * @description: Is it a production mode 生产模式
  * @returns:
  * @example:
  */

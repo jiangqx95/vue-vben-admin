@@ -14,6 +14,7 @@ import projectSetting from '/@/settings/projectSetting';
 import { createParamMenuGuard } from './paramMenuGuard';
 
 // Don't change the order of creation
+// 不要改变创造的顺序
 export function setupRouterGuard(router: Router) {
   createPageGuard(router);
   createPageLoadingGuard(router);
@@ -34,8 +35,10 @@ function createPageGuard(router: Router) {
 
   router.beforeEach(async (to) => {
     // The page has already been loaded, it will be faster to open it again, you don’t need to do loading and other processing
+    // 页面已经加载过了，重新打开会更快，不需要做加载等处理
     to.meta.loaded = !!loadedPageMap.get(to.path);
     // Notify routing changes
+    // 通知路由变化
     setRouteChange(to);
 
     return true;
@@ -47,6 +50,7 @@ function createPageGuard(router: Router) {
 }
 
 // Used to handle page loading status
+// 用于处理页面加载状态
 function createPageLoadingGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const appStore = useAppStoreWithOut();
@@ -60,7 +64,7 @@ function createPageLoadingGuard(router: Router) {
     }
 
     if (unref(getOpenPageLoading)) {
-      appStore.setPageLoadingAction(true);
+      await appStore.setPageLoadingAction(true);
       return true;
     }
 

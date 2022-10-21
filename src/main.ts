@@ -3,6 +3,7 @@ import 'virtual:windi-components.css';
 import '/@/design/index.less';
 import 'virtual:windi-utilities.css';
 // Register icon sprite
+// 注册图标
 import 'virtual:svg-icons-register';
 import App from './App.vue';
 import { createApp } from 'vue';
@@ -64,4 +65,4 @@ async function bootstrap() {
   app.mount('#app');
 }
 
-bootstrap();
+bootstrap().then();

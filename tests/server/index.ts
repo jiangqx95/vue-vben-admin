@@ -1,10 +1,18 @@
+// @ts-ignore
 import Koa from 'koa';
 import path from 'path';
+// @ts-ignore
 import Router from 'koa-router';
+// @ts-ignore
 import body from 'koa-body';
+// @ts-ignore
 import cors from 'koa2-cors';
+// @ts-ignore
 import koaStatic from 'koa-static';
+// @ts-ignore
 import websockify from 'koa-websocket';
+
+// @ts-ignore
 import route from 'koa-route';
 
 import AppRoutes from './routes';

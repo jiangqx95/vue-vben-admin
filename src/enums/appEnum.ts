@@ -9,8 +9,11 @@ export enum ContentEnum {
 }
 
 // menu theme enum
+// 主题
 export enum ThemeEnum {
+  // 夜晚模式
   DARK = 'dark',
+  // 白天模式
   LIGHT = 'light',
 }
 

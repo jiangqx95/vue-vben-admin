@@ -4,6 +4,7 @@ import { resolve } from 'path';
 
 /**
  * less global variable
+ * less 全局变量
  */
 export function generateModifyVars(dark = false) {
   const palettes = generateAntColors(primaryColor);
@@ -19,7 +20,9 @@ export function generateModifyVars(dark = false) {
   return {
     ...modifyVars,
     // Used for global import to avoid the need to import each style file separately
+    // 用于全局导入，以避免需要分别导入每个样式文件
     // reference:  Avoid repeated references
+    // 参考:避免重复引用
     hack: `${modifyVars.hack} @import (reference) "${resolve('src/design/config.less')}";`,
     'primary-color': primary,
     ...primaryColorObj,

@@ -1,5 +1,5 @@
 /**
- * @description: Exception related enumeration
+ * @description: Exception related enumeration 异常相关的枚举
  */
 export enum ExceptionEnum {
   // page not access

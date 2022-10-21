@@ -1,5 +1,6 @@
 /**
  * Used to monitor routing changes to change the status of menus and tabs. There is no need to monitor the route, because the route status change is affected by the page rendering time, which will be slow
+ * 用于监视路由变化，以更改菜单和选项卡的状态。不需要监控路由，因为路由状态的变化会受到页面呈现时间的影响，会比较慢
  */
 
 import mitt from '/@/utils/mitt';

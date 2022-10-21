@@ -208,7 +208,7 @@ const setting: ProjectConfig = {
 
   // Use error-handler-plugin
   // 使用错误处理程序插件
-  useErrorHandle: false,
+  useErrorHandle: true,
 
   // Whether to open back to top
   // 是否打开返回顶部

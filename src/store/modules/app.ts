@@ -20,10 +20,12 @@ import { deepMerge } from '/@/utils';
 interface AppState {
   darkMode?: ThemeEnum;
   // Page loading status
+  // 页面加载状态
   pageLoading: boolean;
   // project config
   projectConfig: ProjectConfig | null;
   // When the window shrinks, remember some states, and restore these states when the window is restored
+  // 当窗口收缩时，记住一些状态，并在窗口恢复时恢复这些状态
   beforeMiniInfo: BeforeMiniState;
 }
 let timeId: TimeoutHandle;

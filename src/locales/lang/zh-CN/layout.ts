@@ -13,6 +13,9 @@ export default {
     tooltipEntryFull: '全屏',
     tooltipExitFull: '退出全屏',
 
+    tooltipSetting: '设置',
+    tooltipLanage: '语言',
+
     // lock
     lockScreenPassword: '锁屏密码',
     lockScreen: '锁定屏幕',
@@ -32,14 +35,17 @@ export default {
     // content mode
     contentModeFull: '流式',
     contentModeFixed: '定宽',
+
     // topMenu align
     topMenuAlignLeft: '居左',
     topMenuAlignRight: '居中',
     topMenuAlignCenter: '居右',
+
     // menu trigger
     menuTriggerNone: '不显示',
     menuTriggerBottom: '底部',
     menuTriggerTop: '顶部',
+
     // menu type
     menuTypeSidebar: '左侧菜单模式',
     menuTypeMixSidebar: '左侧菜单混合模式',
@@ -57,7 +63,7 @@ export default {
     copyBtn: '拷贝',
     clearBtn: '清空缓存并返回登录页',
 
-    drawerTitle: '项目配置',
+    drawerTitle: '系统配置',
 
     darkMode: '主题',
     navMode: '导航栏模式',

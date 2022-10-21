@@ -1,5 +1,6 @@
 /**
  * Used to parse the .env.development proxy configuration
+ * 用于解析.env.development代理配置
  */
 import type { ProxyOptions } from 'vite';
 

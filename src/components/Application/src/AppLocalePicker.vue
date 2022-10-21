@@ -11,20 +11,25 @@
     @menu-event="handleMenuEvent"
     overlayClassName="app-locale-picker-overlay"
   >
-    <span class="cursor-pointer flex items-center">
-      <Icon icon="ion:language" />
-      <span v-if="showText" class="ml-1">{{ getLocaleText }}</span>
-    </span>
+    <Tooltip :title="t('layout.header.tooltipLanage')">
+      <span class="cursor-pointer flex items-center">
+        <Icon icon="ion:language" />
+        <span v-if="showText" class="ml-1">{{ getLocaleText }}</span>
+      </span>
+    </Tooltip>
   </Dropdown>
 </template>
 <script lang="ts" setup>
   import type { LocaleType } from '/#/config';
-  import type { DropMenu } from '/@/components/Dropdown';
+  import type { DropMenu, Dropdown } from '/@/components/Dropdown';
   import { ref, watchEffect, unref, computed } from 'vue';
-  import { Dropdown } from '/@/components/Dropdown';
   import { Icon } from '/@/components/Icon';
   import { useLocale } from '/@/locales/useLocale';
   import { localeList } from '/@/settings/localeSetting';
+  import { useI18n } from '/@/hooks/web/useI18n';
+  import { Tooltip } from 'ant-design-vue';
+
+  const { t } = useI18n();
 
   const props = defineProps({
     /**

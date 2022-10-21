@@ -1,16 +1,17 @@
 <template>
   <div :class="prefixCls">
     <Popover title="" trigger="click" :overlayClassName="`${prefixCls}__overlay`">
-      <Badge :count="count" dot :numberStyle="numberStyle">
-        <BellOutlined />
-      </Badge>
+      <Tooltip :title="t('layout.header.tooltipNotify')">
+        <Badge :count="count" dot :numberStyle="numberStyle">
+          <BellOutlined />
+        </Badge>
+      </Tooltip>
       <template #content>
         <Tabs>
           <template v-for="item in listData" :key="item.key">
             <TabPane>
               <template #tab>
-                {{ item.name }}
-                <span v-if="item.list.length !== 0">({{ item.list.length }})</span>
+                {{ item.name }} <span v-if="item.list.length !== 0">({{ item.list.length }})</span>
               </template>
               <!-- 绑定title-click事件的通知列表中标题是“可点击”的-->
               <NoticeList :list="item.list" v-if="item.key === '1'" @title-click="onNoticeClick" />
@@ -24,16 +25,18 @@
 </template>
 <script lang="ts">
   import { computed, defineComponent, ref } from 'vue';
-  import { Popover, Tabs, Badge } from 'ant-design-vue';
+  import { Popover, Tabs, Badge, Tooltip } from 'ant-design-vue';
   import { BellOutlined } from '@ant-design/icons-vue';
   import { tabListData, ListItem } from './data';
   import NoticeList from './NoticeList.vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useMessage } from '/@/hooks/web/useMessage';
+  import { useI18n } from '/@/hooks/web/useI18n';
 
   export default defineComponent({
-    components: { Popover, BellOutlined, Tabs, TabPane: Tabs.TabPane, Badge, NoticeList },
+    components: { Popover, BellOutlined, Tabs, TabPane: Tabs.TabPane, Badge, Tooltip, NoticeList },
     setup() {
+      const { t } = useI18n();
       const { prefixCls } = useDesign('header-notify');
       const { createMessage } = useMessage();
       const listData = ref(tabListData);
@@ -53,6 +56,7 @@
       }
 
       return {
+        t,
         prefixCls,
         listData,
         count,

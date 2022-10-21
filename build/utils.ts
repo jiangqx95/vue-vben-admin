@@ -12,12 +12,14 @@ export function isProdFn(mode: string): boolean {
 
 /**
  * Whether to generate package preview
+ * 是否生成包预览
  */
 export function isReportMode(): boolean {
   return process.env.REPORT === 'true';
 }
 
 // Read all environment variable configuration files to process.env
+// 读取所有环境变量配置文件到process.env
 export function wrapperEnv(envConf: Recordable): ViteEnv {
   const ret: any = {};
 
@@ -61,6 +63,7 @@ function getConfFiles() {
 
 /**
  * Get the environment variables starting with the specified prefix
+ * 获取以指定前缀开头的环境变量
  * @param match prefix
  * @param confFiles ext
  */
@@ -85,6 +88,7 @@ export function getEnvConfig(match = 'VITE_GLOB_', confFiles = getConfFiles()) {
 
 /**
  * Get user root directory
+ * 获取用户根目录
  * @param dir file path
  */
 export function getRootPath(...dir: string[]) {

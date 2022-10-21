@@ -1,3 +1,7 @@
+/**
+ * @description: Cache related enumeration 缓存相关的枚举
+ */
+
 // token key
 export const TOKEN_KEY = 'TOKEN__';
 
@@ -26,6 +30,8 @@ export const APP_LOCAL_CACHE_KEY = 'COMMON__LOCAL__KEY__';
 export const APP_SESSION_CACHE_KEY = 'COMMON__SESSION__KEY__';
 
 export enum CacheTypeEnum {
+  // SESSION
   SESSION,
+  // 本地
   LOCAL,
 }

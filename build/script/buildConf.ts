@@ -1,5 +1,6 @@
 /**
  * Generate additional configuration files when used for packaging. The file can be configured with some global variables, so that it can be changed directly externally without repackaging
+ * 在用于打包时生成额外的配置文件。可以用一些全局变量配置文件，这样就可以在外部直接更改它，而不需要重新打包
  */
 import { GLOB_CONFIG_FILE_NAME, OUTPUT_DIR } from '../constant';
 import fs, { writeFileSync } from 'fs-extra';
@@ -21,6 +22,7 @@ function createConfig(params: CreateConfigParams) {
   try {
     const windowConf = `window.${configName}`;
     // Ensure that the variable will not be modified
+    // 确保该变量不会被修改
     let configStr = `${windowConf}=${JSON.stringify(config)};`;
     configStr += `
       Object.freeze(${windowConf});

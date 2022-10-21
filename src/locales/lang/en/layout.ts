@@ -12,6 +12,9 @@ export default {
     tooltipEntryFull: 'Full Screen',
     tooltipExitFull: 'Exit Full Screen',
 
+    tooltipSetting: 'Setting',
+    tooltipLanage: 'Lanage',
+
     // lock
     lockScreenPassword: 'Lock screen password',
     lockScreen: 'Lock screen',

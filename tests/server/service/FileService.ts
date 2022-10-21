@@ -48,7 +48,7 @@ export default class UserService {
     } else {
       fileFunc(files);
     }
-    fs.ensureDir(filePath);
+    await fs.ensureDir(filePath);
     returnFunc(isMultiple);
   }
 }

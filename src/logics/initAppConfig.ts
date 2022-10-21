@@ -23,6 +23,7 @@ import { deepMerge } from '/@/utils';
 import { ThemeEnum } from '/@/enums/appEnum';
 
 // Initial project configuration
+// 初始化系统配置
 export function initAppConfigStore() {
   const localeStore = useLocaleStore();
   const appStore = useAppStore();
@@ -39,7 +40,7 @@ export function initAppConfigStore() {
   } = projCfg;
   try {
     if (themeColor && themeColor !== primaryColor) {
-      changeTheme(themeColor);
+      changeTheme(themeColor).then();
     }
 
     grayMode && updateGrayMode(grayMode);
@@ -50,7 +51,7 @@ export function initAppConfigStore() {
   appStore.setProjectConfig(projCfg);
 
   // init dark mode
-  updateDarkTheme(darkMode);
+  updateDarkTheme(darkMode).then();
   if (darkMode === ThemeEnum.DARK) {
     updateHeaderBgColor();
     updateSidebarBgColor();

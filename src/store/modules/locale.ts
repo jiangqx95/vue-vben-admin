@@ -39,6 +39,7 @@ export const useLocaleStore = defineStore({
     },
     /**
      * Initialize multilingual information and load the existing configuration from the local cache
+     * 初始化多语言信息并从本地缓存加载现有配置
      */
     initLocale() {
       this.setLocaleInfo({

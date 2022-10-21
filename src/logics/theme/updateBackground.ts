@@ -13,6 +13,7 @@ const SIDER_LIGHTEN_BG_COLOR = '--sider-dark-lighten-bg-color';
 
 /**
  * Change the background color of the top header
+ * 更改顶部标题的背景颜色
  * @param color
  */
 export function updateHeaderBgColor(color?: string) {
