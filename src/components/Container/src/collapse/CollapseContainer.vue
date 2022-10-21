@@ -80,7 +80,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-collapse-container';
+  @prefix-cls: ~'@{prefix-name}-collapse-container';
 
   .@{prefix-cls} {
     background-color: @component-background;

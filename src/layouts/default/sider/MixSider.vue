@@ -343,7 +343,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-layout-mix-sider';
+  @prefix-cls: ~'@{prefix-name}-layout-mix-sider';
   @width: 80px;
   .@{prefix-cls} {
     position: fixed;

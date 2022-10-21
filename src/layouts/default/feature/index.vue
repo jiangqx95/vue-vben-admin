@@ -59,7 +59,7 @@
 </template>
 
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-setting-drawer-feature';
+  @prefix-cls: ~'@{prefix-name}-setting-drawer-feature';
 
   .@{prefix-cls} {
     position: absolute;

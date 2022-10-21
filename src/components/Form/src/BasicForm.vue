@@ -305,7 +305,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-basic-form';
+  @prefix-cls: ~'@{prefix-name}-basic-form';
 
   .@{prefix-cls} {
     .ant-form-item {

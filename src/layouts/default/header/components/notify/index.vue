@@ -63,7 +63,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-header-notify';
+  @prefix-cls: ~'@{prefix-name}-header-notify';
 
   .@{prefix-cls} {
     padding-top: 2px;

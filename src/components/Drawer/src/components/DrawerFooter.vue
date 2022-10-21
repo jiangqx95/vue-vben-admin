@@ -64,7 +64,7 @@
 </script>
 
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-basic-drawer-footer';
+  @prefix-cls: ~'@{prefix-name}-basic-drawer-footer';
   @footer-height: 60px;
   .@{prefix-cls} {
     position: absolute;

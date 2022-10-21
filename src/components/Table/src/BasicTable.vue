@@ -352,7 +352,7 @@
 <style lang="less">
   @border-color: #cecece4d;
 
-  @prefix-cls: ~'@{namespace}-basic-table';
+  @prefix-cls: ~'@{prefix-name}-basic-table';
 
   [data-theme='dark'] {
     .ant-table-tbody > tr:hover.ant-table-row-selected > td,

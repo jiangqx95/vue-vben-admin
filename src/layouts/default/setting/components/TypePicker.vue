@@ -52,7 +52,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-setting-menu-type-picker';
+  @prefix-cls: ~'@{prefix-name}-setting-menu-type-picker';
 
   .@{prefix-cls} {
     display: flex;

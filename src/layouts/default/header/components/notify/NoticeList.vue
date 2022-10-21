@@ -137,7 +137,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-header-notify-list';
+  @prefix-cls: ~'@{prefix-name}-header-notify-list';
 
   .@{prefix-cls} {
     &::-webkit-scrollbar {

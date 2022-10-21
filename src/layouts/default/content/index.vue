@@ -30,7 +30,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-layout-content';
+  @prefix-cls: ~'@{prefix-name}-layout-content';
 
   .@{prefix-cls} {
     position: relative;

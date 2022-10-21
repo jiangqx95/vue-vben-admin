@@ -332,7 +332,7 @@
 <style lang="less" scoped></style>
 
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-tinymce-container';
+  @prefix-cls: ~'@{prefix-name}-tinymce-container';
 
   .@{prefix-cls} {
     position: relative;

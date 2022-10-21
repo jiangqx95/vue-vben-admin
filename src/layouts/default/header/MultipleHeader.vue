@@ -106,7 +106,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-layout-multiple-header';
+  @prefix-cls: ~'@{prefix-name}-layout-multiple-header';
 
   .@{prefix-cls} {
     transition: width 0.2s;

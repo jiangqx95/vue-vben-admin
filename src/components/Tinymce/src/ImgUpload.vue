@@ -80,7 +80,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-tinymce-img-upload';
+  @prefix-cls: ~'@{prefix-name}-tinymce-img-upload';
 
   .@{prefix-cls} {
     position: absolute;

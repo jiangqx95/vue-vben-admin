@@ -92,7 +92,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-header-lock-modal';
+  @prefix-cls: ~'@{prefix-name}-header-lock-modal';
 
   .@{prefix-cls} {
     &__entry {

@@ -1,4 +1,4 @@
-@prefix-cls: ~'@{namespace}-multiple-tabs';
+@prefix-cls: ~'@{prefix-name}-multiple-tabs';
 
 html[data-theme='dark'] {
   .@{prefix-cls} {
@@ -18,8 +18,8 @@ html[data-theme='light'] {
 
 .@{prefix-cls} {
   z-index: 10;
-  height: @multiple-height + 2;
-  line-height: @multiple-height + 2;
+  height: @multiple-height + 3;
+  line-height: @multiple-height + 3;
   background-color: @component-background;
   border-bottom: 1px solid @border-color-base;
 
@@ -36,8 +36,12 @@ html[data-theme='light'] {
       border: 0;
       box-shadow: none;
 
+      &::before {
+        border-bottom: none !important;
+      }
+
       .ant-tabs-nav-container {
-        height: @multiple-height;
+        height: @multiple-height + 1;
         padding-top: 2px;
       }
 

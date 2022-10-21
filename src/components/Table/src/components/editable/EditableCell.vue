@@ -14,7 +14,7 @@
   import { propTypes } from '/@/utils/propTypes';
   import { isArray, isBoolean, isFunction, isNumber, isString } from '/@/utils/is';
   import { createPlaceholderMessage } from './helper';
-  import { omit, pick, set } from 'lodash-es';
+  import { pick, set } from 'lodash-es';
   import { treeToList } from '/@/utils/helper/treeHelper';
   import { Spin } from 'ant-design-vue';
 
@@ -444,7 +444,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-editable-cell';
+  @prefix-cls: ~'@{prefix-name}-editable-cell';
 
   .edit-cell-align-left {
     text-align: left;

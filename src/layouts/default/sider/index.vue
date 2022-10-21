@@ -42,7 +42,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-layout-sider-wrapper';
+  @prefix-cls: ~'@{prefix-name}-layout-sider-wrapper';
 
   .@{prefix-cls} {
     .ant-drawer-body {

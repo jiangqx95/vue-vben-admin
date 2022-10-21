@@ -43,7 +43,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-basic-table-title';
+  @prefix-cls: ~'@{prefix-name}-basic-table-title';
 
   .@{prefix-cls} {
     display: flex;
