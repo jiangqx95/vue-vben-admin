@@ -25,6 +25,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   const env = loadEnv(mode, root);
 
   // The boolean type read by loadEnv is a string. This function can be converted to boolean type
+  // loadEnv读取的布尔类型是一个字符串。这个函数可以转换为布尔类型
   const viteEnv = wrapperEnv(env);
 
   const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv;
@@ -55,6 +56,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       https: true,
       // Listening on all local IPs
+      // 监听所有本地ip
       host: true,
       port: VITE_PORT,
       // Load proxy configuration from .env
@@ -86,6 +88,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       // Suppress warning
       __INTLIFY_PROD_DEVTOOLS__: false,
       __APP_INFO__: JSON.stringify(__APP_INFO__),
+      'process.env': {},
     },
 
     css: {

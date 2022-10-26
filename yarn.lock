@@ -6020,6 +6020,11 @@ js-base64@^2.1.9:
   resolved "http://124.70.18.186:7081/repository/npm-group/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
   integrity sha512-pZe//GGmwJndub7ZghVHz7vjb2LgC1m8B07Au3eYqeqv9emhESByMXxaEgkUkEqJe87oBbSniGYoQNIBklc7IQ==
 
+js-cookie@^3.0.1:
+  version "3.0.1"
+  resolved "http://124.70.18.186:7081/repository/npm-group/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
+  integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
+
 js-sdsl@^4.1.4:
   version "4.1.5"
   resolved "http://124.70.18.186:7081/repository/npm-group/js-sdsl/-/js-sdsl-4.1.5.tgz#1ff1645e6b4d1b028cd3f862db88c9d887f26e2a"
@@ -6041,6 +6046,11 @@ js-yaml@^4.1.0:
   integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
   dependencies:
     argparse "^2.0.1"
+
+jsencrypt@^3.0.0-rc.1:
+  version "3.3.0"
+  resolved "http://124.70.18.186:7081/repository/npm-group/jsencrypt/-/jsencrypt-3.3.0.tgz#110ea2326cf6d05e5ae92be852c051badeffc4d4"
+  integrity sha512-OPfQMUU3pJ6KKTvKzr83jePHfyD1zWiWeLtRU9yIWjcbaRWm8MuXIu1/eQlDXPwDZrUjZy+9HVamS2Kmwrvz/Q==
 
 jsesc@^2.5.1:
   version "2.5.2"

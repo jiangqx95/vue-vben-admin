@@ -1,9 +1,8 @@
-/**
- * @description: Login interface parameters
- */
 export interface LoginParams {
   username: string;
   password: string;
+  code: string;
+  uuid: string;
 }
 
 export interface RoleInfo {
@@ -11,28 +10,39 @@ export interface RoleInfo {
   value: string;
 }
 
-/**
- * @description: Login interface return value
- */
 export interface LoginResultModel {
-  userId: string | number;
   token: string;
-  role: RoleInfo;
+  user: GetUserInfoModel;
 }
 
-/**
- * @description: Get user information return value
- */
 export interface GetUserInfoModel {
-  roles: RoleInfo[];
-  // 用户id
-  userId: string | number;
-  // 用户名
+  authorities: AuthorityModel[];
+  dataScopes: [];
+  roles: string[];
+  user: UsertModel;
+}
+
+export interface UsertModel {
+  avatarName: string;
+  avatarPath: string;
+  createTime: string;
+  dept: object;
+  email: string;
+  enabled: boolean;
+  gender: string;
+  id: string | number;
+  isAdmin: boolean;
+  jobs: object[];
+  nickName: string;
+  password: string;
+  phone: string;
+  pwdResetTime: string;
+  updateBy: string;
+  updateTime: string;
   username: string;
-  // 真实名字
-  realName: string;
-  // 头像
-  avatar: string;
-  // 介绍
-  desc?: string;
+  homePath: string;
+}
+
+export interface AuthorityModel {
+  authority: string;
 }

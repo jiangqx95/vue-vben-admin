@@ -8,6 +8,7 @@ enum Api {
 }
 
 // Get personal center-basic settings
+// 设置个人中心的基本设置
 
 export const accountInfoApi = () => defHttp.get<GetAccountInfoModel>({ url: Api.ACCOUNT_INFO });
 

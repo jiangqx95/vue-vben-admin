@@ -99,6 +99,7 @@
 
       &-form {
         background: transparent !important;
+        min-width: 400px;
       }
 
       .app-iconify {
@@ -116,12 +117,18 @@
   .@{prefix-cls} {
     min-height: 100%;
     overflow: hidden;
+
     @media (max-width: @screen-xl) {
       background-color: #293146;
 
       .@{prefix-cls}-form {
         background-color: #fff;
+        min-width: 400px;
       }
+    }
+
+    &-form {
+      min-width: 400px;
     }
 
     &::before {
@@ -185,25 +192,25 @@
       }
     }
 
-    input:not([type='checkbox']) {
-      min-width: 360px;
-
-      @media (max-width: @screen-xl) {
-        min-width: 320px;
-      }
-
-      @media (max-width: @screen-lg) {
-        min-width: 260px;
-      }
-
-      @media (max-width: @screen-md) {
-        min-width: 240px;
-      }
-
-      @media (max-width: @screen-sm) {
-        min-width: 160px;
-      }
-    }
+    //input:not([type='checkbox']) {
+    //  min-width: 360px;
+    //
+    //  @media (max-width: @screen-xl) {
+    //    min-width: 320px;
+    //  }
+    //
+    //  @media (max-width: @screen-lg) {
+    //    min-width: 260px;
+    //  }
+    //
+    //  @media (max-width: @screen-md) {
+    //    min-width: 240px;
+    //  }
+    //
+    //  @media (max-width: @screen-sm) {
+    //    min-width: 160px;
+    //  }
+    //}
 
     .@{countdown-prefix-cls} input {
       min-width: unset;

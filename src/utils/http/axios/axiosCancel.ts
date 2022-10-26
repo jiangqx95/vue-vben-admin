@@ -3,6 +3,7 @@ import axios from 'axios';
 import { isFunction } from '/@/utils/is';
 
 // Used to store the identification and cancellation function of each request
+// 用于存储每个请求的识别和取消功能
 let pendingMap = new Map<string, Canceler>();
 
 export const getPendingUrl = (config: AxiosRequestConfig) => [config.method, config.url].join('&');

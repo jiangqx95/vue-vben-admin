@@ -8,6 +8,7 @@ const scopes = fs
   .map((dirent) => dirent.name.replace(/s$/, ''));
 
 // precomputed scope
+// 预先计算的范围
 const scopeComplete = execSync('git status --porcelain || true')
   .toString()
   .trim()
