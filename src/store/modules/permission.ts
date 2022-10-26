@@ -241,6 +241,7 @@ export const usePermissionStore = defineStore({
           routeList = filter(routeList, routeRemoveIgnoreFilter);
           routeList = routeList.filter(routeRemoveIgnoreFilter);
 
+          debugger;
           routeList = flatMultiLevelRoutes(routeList);
           routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
           break;

@@ -174,11 +174,12 @@ const transform: AxiosTransform = {
     const { t } = useI18n();
     const errorLogStore = useErrorLogStoreWithOut();
     errorLogStore.addAjaxErrorInfo(error);
+
     const { response, code, message, config } = error || {};
     const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none';
-    const msg: string = response?.data?.error?.message ?? '';
+    const msg: string = response?.data?.error?.message ?? response?.data?.message ?? '';
     const err: string = error?.toString?.() ?? '';
-    let errMessage = '';
+    let errMessage = msg ?? '';
 
     if (axios.isCancel(error)) {
       return Promise.reject(error);

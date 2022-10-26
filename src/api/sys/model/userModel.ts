@@ -19,10 +19,10 @@ export interface GetUserInfoModel {
   authorities: AuthorityModel[];
   dataScopes: [];
   roles: string[];
-  user: UsertModel;
+  user: UserModel;
 }
 
-export interface UsertModel {
+export interface UserModel {
   avatarName: string;
   avatarPath: string;
   createTime: string;
@@ -37,6 +37,7 @@ export interface UsertModel {
   password: string;
   phone: string;
   pwdResetTime: string;
+  roles: object[];
   updateBy: string;
   updateTime: string;
   username: string;

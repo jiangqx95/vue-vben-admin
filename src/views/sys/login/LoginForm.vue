@@ -152,12 +152,14 @@
   });
 
   // 获取cookie
-  const username = Cookies.get('username');
-  formData.username = username === undefined ? formData.username : username;
-  const password = Cookies.get('password');
-  formData.password = password === undefined ? formData.password : password;
   const rememberMe_ = Cookies.get('rememberMe');
   rememberMe.value = rememberMe_ === undefined ? false : Boolean(rememberMe_);
+  if (rememberMe.value) {
+    const username = Cookies.get('username');
+    formData.username = username === undefined ? formData.username : username;
+    const password = Cookies.get('password');
+    formData.password = password === undefined ? formData.password : password;
+  }
 
   // 回车登录
   onKeyStroke('Enter', handleLogin);
@@ -190,7 +192,7 @@
         username: data.username, // 用户名
         code: data.code, // 验证码
         uuid: captcha.uuid, // uuid
-        mode: 'none', //不要默认的错误提示
+        mode: 'none',
       });
       if (userInfo) {
         if (rememberMe.value) {
@@ -209,9 +211,20 @@
         });
       }
     } catch (error) {
+      // 刷新二维码
+      if (captcha.show) {
+        await getVerificationCode();
+      }
+      // @ts-ignore
+      const { response, message } = error || {};
+      // 错误提示
       createErrorModal({
         title: t('sys.api.errorTip'),
-        content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
+        content:
+          response?.data?.message ||
+          response?.data?.error?.message ||
+          message ||
+          t('sys.api.networkExceptionMsg'),
         getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
       });
     } finally {

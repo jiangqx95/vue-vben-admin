@@ -14,6 +14,7 @@ import { router } from '/@/router';
 import { usePermissionStore } from '/@/store/modules/permission';
 import { RouteRecordRaw } from 'vue-router';
 import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
+import { isArray } from '/@/utils/is';
 import { h } from 'vue';
 
 interface UserState {
@@ -100,16 +101,66 @@ export const useUserStore = defineStore({
     },
     async afterLoginAction(userInfo, goHome?: boolean): Promise<GetUserInfoModel | null> {
       if (!this.getToken) return null;
+
+      let { roles = [] } = userInfo;
+      roles = [
+        {
+          roleName: 'Super Admin',
+          value: 'super',
+        },
+        {
+          roleName: 'tester',
+          value: 'test',
+        },
+      ];
+      if (isArray(roles)) {
+        const roleList = roles.map((item) => item.value) as RoleEnum[];
+        this.setRoleList(roleList);
+      } else {
+        userInfo.roles = [];
+        this.setRoleList([]);
+      }
+
+      userInfo.user.roles = [
+        {
+          roleName: 'Super Admin',
+          value: 'super',
+        },
+        {
+          roleName: 'tester',
+          value: 'test',
+        },
+      ];
+
+      const info: UserInfo = {
+        avatar: userInfo.user.avatarPath,
+        desc: '',
+        homePath: userInfo.user.homePath,
+        realName: userInfo.user.nickName,
+        roles: userInfo.user.roles,
+        userId: userInfo.user.id,
+      };
+
+      //this.setUserInfo(userInfo.user);
+      this.setUserInfo(info);
+
       const sessionTimeout = this.sessionTimeout;
+
+      console.log(sessionTimeout);
+
+      debugger;
+
       if (sessionTimeout) {
         this.setSessionTimeout(false);
       } else {
         const permissionStore = usePermissionStore();
+        console.log(permissionStore);
         if (!permissionStore.isDynamicAddedRoute) {
           const routes = await permissionStore.buildRoutesAction();
           routes.forEach((route) => {
             router.addRoute(route as unknown as RouteRecordRaw);
           });
+          debugger;
           router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
           permissionStore.setDynamicAddedRoute(true);
         }
@@ -117,6 +168,20 @@ export const useUserStore = defineStore({
       }
       return userInfo;
     },
+    // async getUserInfoAction(): Promise<UserInfo | null> {
+    //   if (!this.getToken) return null;
+    //   const userInfo = await getUserInfo();
+    //   const { roles = [] } = userInfo;
+    //   if (isArray(roles)) {
+    //     const roleList = roles.map((item) => item.value) as RoleEnum[];
+    //     this.setRoleList(roleList);
+    //   } else {
+    //     userInfo.roles = [];
+    //     this.setRoleList([]);
+    //   }
+    //   this.setUserInfo(userInfo);
+    //   return userInfo;
+    // },
     /**
      * @description: logout
      */
