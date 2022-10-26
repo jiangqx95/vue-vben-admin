@@ -5,10 +5,12 @@ import { ErrorMessageMode } from '/#/axios';
 
 enum Api {
   Login = '/login',
+  // Login = '/auth/login',
   Logout = '/logout',
   GetUserInfo = '/getUserInfo',
   GetPermCode = '/getPermCode',
   TestRetry = '/testRetry',
+  GetVerificationCode = '/auth/code',
 }
 
 /**
@@ -23,6 +25,13 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
     {
       errorMessageMode: mode,
     },
+  );
+}
+
+export function getVerificationCode() {
+  return defHttp.get(
+    { url: 'http://localhost:8000' + Api.GetVerificationCode },
+    { errorMessageMode: 'none' },
   );
 }
 

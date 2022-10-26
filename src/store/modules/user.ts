@@ -7,7 +7,7 @@ import { PageEnum } from '/@/enums/pageEnum';
 import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
-import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
+import { doLogout, getUserInfo, getVerificationCode, loginApi } from '/@/api/sys/user';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
@@ -80,7 +80,7 @@ export const useUserStore = defineStore({
       this.sessionTimeout = false;
     },
     /**
-     * @description: login
+     * @description: login 登录
      */
     async login(
       params: LoginParams & {
@@ -150,7 +150,18 @@ export const useUserStore = defineStore({
       this.setToken(undefined);
       this.setSessionTimeout(false);
       this.setUserInfo(null);
-      goLogin && router.push(PageEnum.BASE_LOGIN);
+      goLogin && (await router.push(PageEnum.BASE_LOGIN));
+    },
+
+    /**
+     * @description: getVerificationCode 获取验证码
+     */
+    async getVerificationCode() {
+      try {
+        return await getVerificationCode();
+      } catch {
+        console.log('获取验证码失败');
+      }
     },
 
     /**

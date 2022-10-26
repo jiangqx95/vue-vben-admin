@@ -12,6 +12,7 @@ export function initAffixTabs(): string[] {
 
   const tabStore = useMultipleTabStore();
   const router = useRouter();
+
   /**
    * @description: Filter all fixed routes
    */
@@ -33,11 +34,13 @@ export function initAffixTabs(): string[] {
     const affixTabs = filterAffixTabs(router.getRoutes() as unknown as RouteLocationNormalized[]);
     affixList.value = affixTabs;
     for (const tab of affixTabs) {
-      tabStore.addTab({
-        meta: tab.meta,
-        name: tab.name,
-        path: tab.path,
-      } as unknown as RouteLocationNormalized);
+      tabStore
+        .addTab({
+          meta: tab.meta,
+          name: tab.name,
+          path: tab.path,
+        } as unknown as RouteLocationNormalized)
+        .then();
     }
   }
 
@@ -72,9 +75,9 @@ export function useTabsDrag(affixTextList: string[]) {
           return;
         }
 
-        tabStore.sortTabs(oldIndex, newIndex);
+        tabStore.sortTabs(oldIndex, newIndex).then();
       },
     });
     initSortable();
-  });
+  }).then();
 }
