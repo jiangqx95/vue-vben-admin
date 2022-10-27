@@ -8,7 +8,7 @@
   >
     <div :class="`${prefixCls}__entry`">
       <div :class="`${prefixCls}__header`">
-        <img :src="avatar" :class="`${prefixCls}__header-img`" />
+        <img :src="avatarPath" :class="`${prefixCls}__header-img`" />
         <p :class="`${prefixCls}__header-name`">
           {{ getRealName }}
         </p>
@@ -74,9 +74,9 @@
         await resetFields();
       }
 
-      const avatar = computed(() => {
-        const { avatar } = userStore.getUserInfo;
-        return avatar || headerImg;
+      const avatarPath = computed(() => {
+        const { avatarPath } = userStore.getUserInfo;
+        return avatarPath || headerImg;
       });
 
       return {
@@ -86,7 +86,7 @@
         register,
         registerForm,
         handleLock,
-        avatar,
+        avatarPath,
       };
     },
   });

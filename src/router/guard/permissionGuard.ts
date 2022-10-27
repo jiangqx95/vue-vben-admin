@@ -19,7 +19,6 @@ export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const permissionStore = usePermissionStoreWithOut();
   router.beforeEach(async (to, from, next) => {
-    debugger;
     if (
       from.path === ROOT_PATH &&
       to.path === PageEnum.BASE_HOME &&
@@ -37,7 +36,7 @@ export function createPermissionGuard(router: Router) {
       if (to.path === LOGIN_PATH && token) {
         const isSessionTimeout = userStore.getSessionTimeout;
         try {
-          await userStore.afterLoginAction();
+          await userStore.afterLoginAction(null);
           if (!isSessionTimeout) {
             next((to.query?.redirect as string) || '/');
             return;
@@ -71,7 +70,6 @@ export function createPermissionGuard(router: Router) {
       return;
     }
 
-    debugger;
     // Jump to the 404 page after processing the login
     if (
       from.path === LOGIN_PATH &&
@@ -85,7 +83,7 @@ export function createPermissionGuard(router: Router) {
     // get userinfo while last fetch time is empty
     if (userStore.getLastUpdateTime === 0) {
       try {
-        await userStore.getUserInfoAction();
+        await userStore.getUserInfoAction(null);
       } catch (err) {
         next();
         return;
@@ -99,14 +97,11 @@ export function createPermissionGuard(router: Router) {
 
     const routes = await permissionStore.buildRoutesAction();
 
-    debugger;
-    console.log(routes);
-
     routes.forEach((route) => {
       router.addRoute(route as unknown as RouteRecordRaw);
     });
 
-    //router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
+    router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
 
     permissionStore.setDynamicAddedRoute(true);
 

@@ -7,7 +7,7 @@ import { PageEnum } from '/@/enums/pageEnum';
 import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
-import { doLogout, getVerificationCode, loginApi } from '/@/api/sys/user';
+import { doLogout, getUserInfo, getVerificationCode, loginApi } from '/@/api/sys/user';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
@@ -90,8 +90,8 @@ export const useUserStore = defineStore({
     ): Promise<GetUserInfoModel | null> {
       try {
         const { goHome = true, mode, ...loginParams } = params;
-        const data = await loginApi(loginParams, mode);
-        const { token, user } = data;
+        const loginResultModel = await loginApi(loginParams, mode);
+        const { token, user } = loginResultModel;
         // save token
         this.setToken(token);
         return this.afterLoginAction(user, goHome);
@@ -99,20 +99,44 @@ export const useUserStore = defineStore({
         return Promise.reject(error);
       }
     },
-    async afterLoginAction(userInfo, goHome?: boolean): Promise<GetUserInfoModel | null> {
+    // 完成完成，后续操作
+    async afterLoginAction(
+      userInfoModel: GetUserInfoModel | null,
+      goHome?: boolean,
+    ): Promise<GetUserInfoModel | null> {
       if (!this.getToken) return null;
 
-      let { roles = [] } = userInfo;
-      roles = [
-        {
-          roleName: 'Super Admin',
-          value: 'super',
-        },
-        {
-          roleName: 'tester',
-          value: 'test',
-        },
-      ];
+      await this.getUserInfoAction(userInfoModel);
+
+      if (this.sessionTimeout) {
+        this.setSessionTimeout(false);
+      } else {
+        const permissionStore = usePermissionStore();
+        if (!permissionStore.isDynamicAddedRoute) {
+          const routes = await permissionStore.buildRoutesAction();
+          routes.forEach((route) => {
+            router.addRoute(route as unknown as RouteRecordRaw);
+          });
+          router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
+          permissionStore.setDynamicAddedRoute(true);
+        }
+        goHome && (await router.replace(userInfoModel?.user?.homePath || PageEnum.BASE_HOME));
+      }
+      return userInfoModel;
+    },
+
+    async getUserInfoAction(userInfoModel: GetUserInfoModel | null): Promise<UserInfo | null> {
+      if (!this.getToken) return null;
+
+      if (!userInfoModel) {
+        userInfoModel = await getUserInfo();
+      }
+
+      const userInfo: UserInfo = Object.assign(userInfoModel.user);
+      userInfo.userId = userInfo.id;
+      userInfo.token = this.getToken;
+
+      const { roles = [] } = userInfo;
       if (isArray(roles)) {
         const roleList = roles.map((item) => item.value) as RoleEnum[];
         this.setRoleList(roleList);
@@ -121,67 +145,9 @@ export const useUserStore = defineStore({
         this.setRoleList([]);
       }
 
-      userInfo.user.roles = [
-        {
-          roleName: 'Super Admin',
-          value: 'super',
-        },
-        {
-          roleName: 'tester',
-          value: 'test',
-        },
-      ];
-
-      const info: UserInfo = {
-        avatar: userInfo.user.avatarPath,
-        desc: '',
-        homePath: userInfo.user.homePath,
-        realName: userInfo.user.nickName,
-        roles: userInfo.user.roles,
-        userId: userInfo.user.id,
-      };
-
-      //this.setUserInfo(userInfo.user);
-      this.setUserInfo(info);
-
-      const sessionTimeout = this.sessionTimeout;
-
-      console.log(sessionTimeout);
-
-      debugger;
-
-      if (sessionTimeout) {
-        this.setSessionTimeout(false);
-      } else {
-        const permissionStore = usePermissionStore();
-        console.log(permissionStore);
-        if (!permissionStore.isDynamicAddedRoute) {
-          const routes = await permissionStore.buildRoutesAction();
-          routes.forEach((route) => {
-            router.addRoute(route as unknown as RouteRecordRaw);
-          });
-          debugger;
-          router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
-          permissionStore.setDynamicAddedRoute(true);
-        }
-        goHome && (await router.replace(userInfo?.user?.homePath || PageEnum.BASE_HOME));
-      }
+      this.setUserInfo(userInfo);
       return userInfo;
     },
-    // async getUserInfoAction(): Promise<UserInfo | null> {
-    //   if (!this.getToken) return null;
-    //   const userInfo = await getUserInfo();
-    //   const { roles = [] } = userInfo;
-    //   if (isArray(roles)) {
-    //     const roleList = roles.map((item) => item.value) as RoleEnum[];
-    //     this.setRoleList(roleList);
-    //   } else {
-    //     userInfo.roles = [];
-    //     this.setRoleList([]);
-    //   }
-    //   this.setUserInfo(userInfo);
-    //   return userInfo;
-    // },
     /**
      * @description: logout
      */

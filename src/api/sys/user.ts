@@ -7,10 +7,10 @@ enum Api {
   Login = '/auth/login',
   // Login = '/auth/login',
   Logout = '/auth/logout',
-  GetUserInfo = '/getUserInfo',
+  GetUserInfo = '/auth/getUserInfo',
   GetPermCode = '/getPermCode',
   TestRetry = '/testRetry',
-  GetVerificationCode = '/auth/code',
+  GetVerificationCode = '/auth/getVerificationCode',
 }
 
 /**
@@ -39,7 +39,10 @@ export function getVerificationCode() {
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: 'none' });
+  return defHttp.get<GetUserInfoModel>(
+    { url: 'http://localhost:8000' + Api.GetUserInfo },
+    { errorMessageMode: 'none' },
+  );
 }
 
 export function getPermCode() {

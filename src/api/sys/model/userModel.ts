@@ -33,7 +33,7 @@ export interface UserModel {
   id: string | number;
   isAdmin: boolean;
   jobs: object[];
-  nickName: string;
+  realName: string;
   password: string;
   phone: string;
   pwdResetTime: string;

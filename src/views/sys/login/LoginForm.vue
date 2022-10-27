@@ -130,6 +130,7 @@
   // 获取验证码
   getVerificationCode();
 
+  const GLOB_APP_SHORT_NAME = import.meta.env.VITE_GLOB_APP_SHORT_NAME + '_';
   const ACol = Col;
   const ARow = Row;
   const FormItem = Form.Item;
@@ -152,12 +153,12 @@
   });
 
   // 获取cookie
-  const rememberMe_ = Cookies.get('rememberMe');
+  const rememberMe_ = Cookies.get(GLOB_APP_SHORT_NAME + 'rememberMe');
   rememberMe.value = rememberMe_ === undefined ? false : Boolean(rememberMe_);
   if (rememberMe.value) {
-    const username = Cookies.get('username');
+    const username = Cookies.get(GLOB_APP_SHORT_NAME + 'username');
     formData.username = username === undefined ? formData.username : username;
-    const password = Cookies.get('password');
+    const password = Cookies.get(GLOB_APP_SHORT_NAME + 'password');
     formData.password = password === undefined ? formData.password : password;
   }
 
@@ -182,23 +183,31 @@
     if (!data) return;
 
     const encrypt_pass =
-      data.password !== Cookies.get('password') ? rsaEncrypt(data.password) : data.password;
+      data.password !== Cookies.get(GLOB_APP_SHORT_NAME + 'password')
+        ? rsaEncrypt(data.password)
+        : data.password;
 
     try {
       loading.value = true;
       // 请求登录接口
-      const userInfo = await userStore.login({
+      const userInfoModel = await userStore.login({
         password: encrypt_pass, // 密码
         username: data.username, // 用户名
         code: data.code, // 验证码
         uuid: captcha.uuid, // uuid
         mode: 'none',
       });
-      if (userInfo) {
+      if (userInfoModel) {
         if (rememberMe.value) {
-          Cookies.set('username', data.username, { expires: cookieSetting.passCookieExpires });
-          Cookies.set('password', encrypt_pass, { expires: cookieSetting.passCookieExpires });
-          Cookies.set('rememberMe', rememberMe, { expires: cookieSetting.passCookieExpires });
+          Cookies.set(GLOB_APP_SHORT_NAME + 'username', data.username, {
+            expires: cookieSetting.passCookieExpires,
+          });
+          Cookies.set(GLOB_APP_SHORT_NAME + 'password', encrypt_pass, {
+            expires: cookieSetting.passCookieExpires,
+          });
+          Cookies.set(GLOB_APP_SHORT_NAME + 'rememberMe', rememberMe, {
+            expires: cookieSetting.passCookieExpires,
+          });
         } else {
           Cookies.remove('username');
           Cookies.remove('password');
@@ -206,7 +215,7 @@
         }
         notification.success({
           message: t('sys.login.loginSuccessTitle'),
-          description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.user.nickName}`,
+          description: `${t('sys.login.loginSuccessDesc')}: ${userInfoModel.user.realName}`,
           duration: 3,
         });
       }

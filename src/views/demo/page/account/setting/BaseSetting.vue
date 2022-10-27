@@ -9,7 +9,7 @@
           <div class="mb-2">头像</div>
           <CropperAvatar
             :uploadApi="uploadApi"
-            :value="avatar"
+            :value="avatarPath"
             btnText="更换头像"
             :btnProps="{ preIcon: 'ant-design:cloud-upload-outlined' }"
             @change="updateAvatar"
@@ -60,20 +60,20 @@
         setFieldsValue(data);
       });
 
-      const avatar = computed(() => {
-        const { avatar } = userStore.getUserInfo;
-        return avatar || headerImg;
+      const avatarPath = computed(() => {
+        const { avatarPath } = userStore.getUserInfo;
+        return avatarPath || headerImg;
       });
 
       function updateAvatar({ src, data }) {
         const userinfo = userStore.getUserInfo;
-        userinfo.avatar = src;
+        userinfo.avatarPath = src;
         userStore.setUserInfo(userinfo);
         console.log('data', data);
       }
 
       return {
-        avatar,
+        avatarPath,
         register,
         uploadApi: uploadApi as any,
         updateAvatar,

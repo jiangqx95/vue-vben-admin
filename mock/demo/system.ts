@@ -8,7 +8,7 @@ const accountList = (() => {
       id: `${index}`,
       account: '@first',
       email: '@email',
-      nickname: '@cname()',
+      realName: '@cname()',
       role: '@first',
       createTime: '@datetime',
       remark: '@cword(10,20)',

@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="8">
             <div :class="`${prefixCls}-top__avatar`">
-              <img width="70" :src="avatar" />
+              <img width="70" :src="avatarPath" />
               <span>Vben</span>
               <div>海纳百川，有容乃大</div>
             </div>
@@ -80,10 +80,10 @@
     },
     setup() {
       const userStore = useUserStore();
-      const avatar = computed(() => userStore.getUserInfo.avatar || headerImg);
+      const avatarPath = computed(() => userStore.getUserInfo.avatarPath || headerImg);
       return {
         prefixCls: 'account-center',
-        avatar,
+        avatarPath,
         tags,
         teams,
         details,

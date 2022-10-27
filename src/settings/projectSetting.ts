@@ -33,7 +33,7 @@ const setting: ProjectConfig = {
 
   // Permission-related cache is stored in sessionStorage or localStorage
   // 权限相关缓存存储在sessionStorage或localStorage中
-  permissionCacheType: CacheTypeEnum.LOCAL,
+  permissionCacheType: CacheTypeEnum.SESSION,
 
   // Session timeout processing
   // 会话超时处理
