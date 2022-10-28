@@ -2,7 +2,7 @@ import { defHttp } from '/@/utils/http/axios';
 import { getMenuListResultModel } from './model/menuModel';
 
 enum Api {
-  GetMenuList = '/getMenuList',
+  GetMenuList = '/api/menus/build',
 }
 
 /**
@@ -10,5 +10,5 @@ enum Api {
  */
 
 export const getMenuList = () => {
-  return defHttp.get<getMenuListResultModel>({ url: Api.GetMenuList });
+  return defHttp.get<getMenuListResultModel>({ url: 'http://localhost:8000' + Api.GetMenuList });
 };

@@ -114,7 +114,6 @@
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import { onKeyStroke } from '@vueuse/core';
   import Cookies from 'js-cookie';
   import { rsaEncrypt } from '/@/utils/encrypt/rsaEncrypt';
   import { cookieSetting } from '/@/settings/cookieSetting';
@@ -162,9 +161,6 @@
     formData.password = password === undefined ? formData.password : password;
   }
 
-  // 回车登录
-  onKeyStroke('Enter', handleLogin);
-
   // 验证码请求
   async function getVerificationCode() {
     userStore.getVerificationCode().then((res) => {
@@ -186,6 +182,16 @@
       data.password !== Cookies.get(GLOB_APP_SHORT_NAME + 'password')
         ? rsaEncrypt(data.password)
         : data.password;
+
+    // 加密失败
+    if (!encrypt_pass) {
+      createErrorModal({
+        title: t('sys.api.errorTip'),
+        content: '密码错误',
+        getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
+      });
+      return false;
+    }
 
     try {
       loading.value = true;
@@ -209,9 +215,9 @@
             expires: cookieSetting.passCookieExpires,
           });
         } else {
-          Cookies.remove('username');
-          Cookies.remove('password');
-          Cookies.remove('rememberMe');
+          Cookies.remove(GLOB_APP_SHORT_NAME + 'username');
+          Cookies.remove(GLOB_APP_SHORT_NAME + 'password');
+          Cookies.remove(GLOB_APP_SHORT_NAME + 'rememberMe');
         }
         notification.success({
           message: t('sys.login.loginSuccessTitle'),

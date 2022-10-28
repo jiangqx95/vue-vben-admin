@@ -29,7 +29,7 @@ const setting: ProjectConfig = {
 
   // Permission mode
   // 权限模式
-  permissionMode: PermissionModeEnum.ROUTE_MAPPING,
+  permissionMode: PermissionModeEnum.BACK,
 
   // Permission-related cache is stored in sessionStorage or localStorage
   // 权限相关缓存存储在sessionStorage或localStorage中

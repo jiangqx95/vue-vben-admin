@@ -223,6 +223,8 @@ export const usePermissionStore = defineStore({
           try {
             await this.changePermissionCode();
             routeList = (await getMenuList()) as AppRouteRecordRaw[];
+            console.log('=========routeList======');
+            console.log(routeList);
           } catch (error) {
             console.error(error);
           }
@@ -230,10 +232,14 @@ export const usePermissionStore = defineStore({
           // Dynamically introduce components
           // 动态引入组件
           routeList = transformObjToRoute(routeList);
+          console.log('=====routeList=====');
+          console.log(routeList);
 
           //  Background routing to menu structure
           //  后台路由到菜单结构
           const backMenuList = transformRouteToMenu(routeList);
+          console.log('=========backMenuList==========');
+          console.log(backMenuList);
           this.setBackMenuList(backMenuList);
 
           // remove meta.ignoreRoute item
@@ -241,7 +247,6 @@ export const usePermissionStore = defineStore({
           routeList = filter(routeList, routeRemoveIgnoreFilter);
           routeList = routeList.filter(routeRemoveIgnoreFilter);
 
-          debugger;
           routeList = flatMultiLevelRoutes(routeList);
           routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
           break;
