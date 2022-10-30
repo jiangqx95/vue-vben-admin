@@ -18,30 +18,26 @@ html[data-theme='light'] {
 
 .@{prefix-cls} {
   z-index: 10;
-  height: @multiple-height + 3;
-  line-height: @multiple-height + 3;
+  height: @multiple-height + 2;
+  line-height: @multiple-height + 2;
   background-color: @component-background;
   border-bottom: 1px solid @border-color-base;
 
   .ant-tabs-small {
-    height: @multiple-height + 1;
+    height: @multiple-height;
   }
 
   .ant-tabs.ant-tabs-card {
     .ant-tabs-nav {
       padding-top: 2px;
-      height: @multiple-height + 1;
+      height: @multiple-height;
       margin: 0;
       background-color: @component-background;
       border: 0;
       box-shadow: none;
 
-      &::before {
-        border-bottom: none !important;
-      }
-
       .ant-tabs-nav-container {
-        height: @multiple-height + 1;
+        height: @multiple-height;
         padding-top: 2px;
       }
 
@@ -71,7 +67,7 @@ html[data-theme='light'] {
 
           &:hover {
             svg {
-              width: 0.7em;
+              width: 0.8em;
             }
           }
         }
@@ -109,7 +105,7 @@ html[data-theme='light'] {
         }
 
         svg {
-          width: 0.75em;
+          width: 0.7em;
           fill: @white;
         }
       }

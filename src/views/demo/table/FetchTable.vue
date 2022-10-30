@@ -20,7 +20,7 @@
     setup() {
       const [registerTable, { reload }] = useTable({
         title: '远程加载示例',
-        api: demoListApi,
+        api: demoListApi({page: 1,pageSize:10}),
         columns: getBasicColumns(),
         pagination: { pageSize: 10 },
       });

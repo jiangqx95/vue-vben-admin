@@ -11,7 +11,7 @@ enum Api {
 
 export const demoListApi = (params: DemoParams) =>
   defHttp.get<DemoListGetResultModel>({
-    url: Api.DEMO_LIST,
+    url: 'http://localhost:8000/api/menus/tree',
     params,
     headers: {
       // @ts-ignore
