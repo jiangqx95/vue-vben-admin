@@ -20,6 +20,7 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
     {
       url: 'http://localhost:8000' + Api.Login,
       params,
+      timeout: 15000
     },
     {
       errorMessageMode: mode,
