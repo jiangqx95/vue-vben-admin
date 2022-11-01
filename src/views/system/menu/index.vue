@@ -41,7 +41,7 @@ import {Tag} from "ant-design-vue";
 import {Icon} from '/@/components/Icon';
 
 // api
-import {getMenuList, deleteMenu} from '/@/api/system/system';
+import {getMenuListAll, deleteMenu} from '/@/api/system/system';
 import {useMessage} from '/@/hooks/web/useMessage';
 
 const {createMessage} = useMessage();
@@ -100,7 +100,7 @@ export default defineComponent({
     const [registerDrawer, {openDrawer}] = useDrawer();
     const [registerTable, {reload}] = useTable({
       title: '菜单列表',
-      api: getMenuList,
+      api: getMenuListAll,
       columns,
       formConfig: {
         labelWidth: 120,

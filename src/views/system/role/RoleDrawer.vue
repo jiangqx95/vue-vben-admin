@@ -12,7 +12,7 @@
         <BasicTree
           v-model:value="model[field]"
           :treeData="treeData"
-          :fieldNames="{ title: 'menuName', key: 'id' }"
+          :fieldNames="{ title: 'title', key: 'id' }"
           checkable
           toolbar
           title="菜单分配"
@@ -23,12 +23,49 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './role.data';
+  import {BasicForm, FormSchema, useForm} from '/@/components/Form/index';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { BasicTree, TreeItem } from '/@/components/Tree';
 
-  import { getMenuList } from '/@/api/demo/system';
+  import { getMenuListAll } from '/@/api/system/system';
+
+  const formSchema: FormSchema[] = [
+    {
+      field: 'name',
+      label: '角色名称',
+      required: true,
+      component: 'Input',
+    },
+    {
+      field: 'roleValue',
+      label: '角色值',
+      required: true,
+      component: 'Input',
+    },
+    {
+      field: 'status',
+      label: '状态',
+      component: 'RadioButtonGroup',
+      defaultValue: '0',
+      componentProps: {
+        options: [
+          { label: '启用', value: '0' },
+          { label: '停用', value: '1' },
+        ],
+      },
+    },
+    {
+      label: '备注',
+      field: 'remark',
+      component: 'InputTextArea',
+    },
+    {
+      label: ' ',
+      field: 'menu',
+      slot: 'menu',
+      component: 'Input',
+    },
+  ];
 
   export default defineComponent({
     name: 'RoleDrawer',
@@ -46,16 +83,16 @@
       });
 
       const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
-        resetFields();
+        await resetFields();
         setDrawerProps({ confirmLoading: false });
         // 需要在setFieldsValue之前先填充treeData，否则Tree组件可能会报key not exist警告
         if (unref(treeData).length === 0) {
-          treeData.value = (await getMenuList()) as any as TreeItem[];
+          treeData.value = (await getMenuListAll()) as any as TreeItem[];
         }
         isUpdate.value = !!data?.isUpdate;
 
         if (unref(isUpdate)) {
-          setFieldsValue({
+          await setFieldsValue({
             ...data.record,
           });
         }
