@@ -9,7 +9,7 @@
   import { defineComponent } from 'vue';
   import { RotateDragVerify } from '/@/components/Verify/index';
 
-  import img from '/@/assets/images/header.jpg';
+  import img from '/@/assets/images/avatar.jpg';
 
   import { PageWrapper } from '/@/components/Page';
 

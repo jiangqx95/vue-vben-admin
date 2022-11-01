@@ -30,7 +30,7 @@
 
   import { useMessage } from '/@/hooks/web/useMessage';
 
-  import headerImg from '/@/assets/images/header.jpg';
+  import avatarImg from '/@/assets/images/avatar.jpg';
   import { accountInfoApi } from '/@/api/demo/account';
   import { baseSetschemas } from './data';
   import { useUserStore } from '/@/store/modules/user';
@@ -62,7 +62,7 @@
 
       const avatarPath = computed(() => {
         const { avatarPath } = userStore.getUserInfo;
-        return avatarPath || headerImg;
+        return avatarPath || avatarImg;
       });
 
       function updateAvatar({ src, data }) {

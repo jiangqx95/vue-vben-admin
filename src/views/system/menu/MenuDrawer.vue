@@ -1,12 +1,10 @@
 <template>
-  <BasicDrawer
-    v-bind="$attrs"
-    @register="registerDrawer"
-    showFooter
-    :title="getTitle"
-    width="50%"
-    @ok="handleSubmit"
-  >
+  <BasicDrawer v-bind="$attrs"
+               @register="registerDrawer"
+               showFooter
+               :title="getTitle"
+               width="50%"
+               @ok="handleSubmit">
     <BasicForm @register="registerForm"/>
   </BasicDrawer>
 </template>
@@ -15,7 +13,7 @@ import {defineComponent, ref, computed, unref} from 'vue';
 import {BasicForm, FormSchema, useForm} from '/@/components/Form/index';
 import {BasicDrawer, useDrawerInner} from '/@/components/Drawer';
 
-import {getMenuList, updateMenu} from '/@/api/demo/system';
+import {getMenuList, updateMenu, addMenu} from '/@/api/system/system';
 
 const isDir = (type: number) => type === 0;
 const isMenu = (type: number) => type === 1;
@@ -26,8 +24,7 @@ export const formSchema: FormSchema[] = [
     field: 'id',
     label: 'id',
     show: false,
-    component: 'Input',
-    required: true
+    component: 'Input'
   },
   {
     field: 'type',
@@ -93,7 +90,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     // field: 'isExt', label: '是否外链', component: 'RadioButtonGroup', defaultValue: '0',
-    field: 'iframe', label: '是否外链', component: 'RadioButtonGroup', defaultValue: false,
+    field: 'iFrame', label: '是否外链', component: 'RadioButtonGroup', defaultValue: false,
     componentProps: {
       options: [
         {label: '否', value: false},
@@ -164,10 +161,13 @@ export default defineComponent({
         const values = await validate();
         setDrawerProps({confirmLoading: true});
 
-        await updateMenu(values);
 
-        // TODO custom api
-        console.log(values);
+        if (isUpdate.value) {
+          await updateMenu(values);
+        } else {
+          await addMenu(values);
+        }
+
         closeDrawer();
         emit('success');
       } finally {

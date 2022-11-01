@@ -49,7 +49,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useModal } from '/@/components/Modal';
 
-  import headerImg from '/@/assets/images/header.jpg';
+  import avatarImg from '/@/assets/images/avatar.jpg';
   import { propTypes } from '/@/utils/propTypes';
   import { openWindow } from '/@/utils';
 
@@ -77,7 +77,7 @@
 
       const getUserInfo = computed(() => {
         const { realName = '', avatarPath, desc } = userStore.getUserInfo || {};
-        return { realName, avatarPath: avatarPath || headerImg, desc };
+        return { realName, avatarPath: avatarPath || avatarImg, desc };
       });
 
       const [register, { openModal }] = useModal();

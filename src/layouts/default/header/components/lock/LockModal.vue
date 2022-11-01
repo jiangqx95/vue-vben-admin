@@ -33,7 +33,7 @@
 
   import { useUserStore } from '/@/store/modules/user';
   import { useLockStore } from '/@/store/modules/lock';
-  import headerImg from '/@/assets/images/header.jpg';
+  import avatarImg from '/@/assets/images/avatar.jpg';
   export default defineComponent({
     name: 'LockModal',
     components: { BasicModal, BasicForm },
@@ -76,7 +76,7 @@
 
       const avatarPath = computed(() => {
         const { avatarPath } = userStore.getUserInfo;
-        return avatarPath || headerImg;
+        return avatarPath || avatarImg;
       });
 
       return {

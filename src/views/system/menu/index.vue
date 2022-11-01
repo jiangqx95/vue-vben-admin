@@ -1,13 +1,15 @@
 <template>
   <div>
-    <BasicTable @register="registerTable" @fetch-success="onFetchSuccess">
+    <BasicTable @register="registerTable"
+                @fetch-success="onFetchSuccess">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate"> 新增菜单</a-button>
+        <a-button type="primary"
+                  @click="handleCreate"> 新增菜单
+        </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
-          <TableAction
-            :actions="[
+          <TableAction :actions="[
               {
                 icon: 'clarity:note-edit-line',
                 onClick: handleEdit.bind(null, record),
@@ -21,16 +23,16 @@
                   confirm: handleDelete.bind(null, record),
                 },
               },
-            ]"
-          />
+            ]"/>
         </template>
       </template>
     </BasicTable>
-    <MenuDrawer @register="registerDrawer" @success="handleSuccess"/>
+    <MenuDrawer @register="registerDrawer"
+                @success="handleSuccess"/>
   </div>
 </template>
 <script lang="ts">
-import {defineComponent, h} from 'vue';
+import {defineComponent, h, toRaw} from 'vue';
 
 import {BasicTable, useTable, TableAction, BasicColumn, FormSchema} from '/@/components/Table';
 import {useDrawer} from '/@/components/Drawer';
@@ -39,7 +41,10 @@ import {Tag} from "ant-design-vue";
 import {Icon} from '/@/components/Icon';
 
 // api
-import {getMenuList} from '/@/api/demo/system';
+import {getMenuList, deleteMenu} from '/@/api/system/system';
+import {useMessage} from '/@/hooks/web/useMessage';
+
+const {createMessage} = useMessage();
 
 // 列数据
 const columns: BasicColumn[] = [
@@ -132,7 +137,10 @@ export default defineComponent({
     }
 
     function handleDelete(record: Recordable) {
-      console.log(record);
+      deleteMenu([toRaw(record).id]).then(() => {
+        reload();
+        createMessage.success("删除成功");
+      });
     }
 
     function handleSuccess() {
