@@ -50,21 +50,28 @@ const {createMessage} = useMessage();
 const columns: BasicColumn[] = [
   {title: '菜单名称', dataIndex: 'title', align: 'left'},
   {
-    title: '图标', dataIndex: 'icon',
+    title: '图标', dataIndex: 'icon', width: 50,
     customRender: ({record}) => {
       return h(Icon, {icon: record.icon});
     }
   },
+  {
+    title: '类型', dataIndex: 'type', width: 80,
+    customRender: ({record}) => {
+      const color = ['green', 'red', 'blue'];
+      const text = ['目录', '菜单', '按钮'];
+      return h(Tag, {color: color[record.type]}, () => text[record.type]);
+    }
+  },
   {title: '权限标识', dataIndex: 'permission'},
   {title: '组件', dataIndex: 'component'},
-  {title: '排序', dataIndex: 'menuSort'},
+  {title: '排序', dataIndex: 'menuSort', width: 50},
   {
-    title: '状态', dataIndex: 'type',
+    title: '状态', dataIndex: 'hidden', width: 80,
     customRender: ({record}) => {
-      const hidden = record.hidden;
-      const enable = ~~hidden === 0;
-      const color = enable ? 'green' : 'red';
-      const text = enable ? '启用' : '停用';
+      const hidden = record.hidden
+      const color = hidden ? 'red' : 'green';
+      const text = hidden ? '停用' : '启用';
       return h(Tag, {color: color}, () => text);
     }
   },
@@ -100,7 +107,7 @@ export default defineComponent({
     const [registerDrawer, {openDrawer}] = useDrawer();
     const [registerTable, {reload}] = useTable({
       title: '菜单列表',
-      api: getMenuListAll,
+      api: (title, hidden) => getMenuListAll(title, hidden),
       columns,
       formConfig: {
         labelWidth: 120,

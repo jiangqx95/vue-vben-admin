@@ -1,6 +1,5 @@
 <template>
   <PageWrapper>
-    sss
     <template #headerContent> <WorkbenchHeader /> </template>
     <div class="lg:flex">
       <div class="lg:w-7/10 w-full !mr-4 enter-y">

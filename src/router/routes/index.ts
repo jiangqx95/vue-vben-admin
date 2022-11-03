@@ -25,7 +25,7 @@ export const RootRoute: AppRouteRecordRaw = {
   name: 'Root',
   redirect: PageEnum.BASE_HOME,
   meta: {
-    title: 'Root',
+    title: '主页',
   },
 };
 
