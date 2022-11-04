@@ -207,7 +207,7 @@ const feat: AppRouteModule = {
     {
       path: '/error-log',
       name: 'ErrorLog',
-      component: () => import('/@/views/sys/error-log/index.vue'),
+      component: () => import('/@/views/system/error-log/index.vue'),
       meta: {
         title: t('routes.demo.feat.errorLog'),
       },

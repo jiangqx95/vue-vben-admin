@@ -36,7 +36,7 @@
   import { PageWrapper } from '/@/components/Page';
   import { CollapseContainer } from '/@/components/Container';
   import { CropperImage, CropperAvatar } from '/@/components/Cropper';
-  import { uploadApi } from '/@/api/sys/upload';
+  import { uploadApi } from '/@/api/system/upload';
   import img from '/@/assets/images/avatar.jpg';
   import { useUserStore } from '/@/store/modules/user';
 

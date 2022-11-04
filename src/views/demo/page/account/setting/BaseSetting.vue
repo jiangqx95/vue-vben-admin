@@ -34,7 +34,7 @@
   import { accountInfoApi } from '/@/api/demo/account';
   import { baseSetschemas } from './data';
   import { useUserStore } from '/@/store/modules/user';
-  import { uploadApi } from '/@/api/sys/upload';
+  import { uploadApi } from '/@/api/system/upload';
 
   export default defineComponent({
     components: {
