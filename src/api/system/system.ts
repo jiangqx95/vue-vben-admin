@@ -9,6 +9,7 @@ import {
   AccountListGetResultModel,
   RolePageListGetResultModel,
   RoleListGetResultModel,
+  getMenuListResultModel
 } from './model/systemModel';
 import {defHttp} from '/@/utils/http/axios';
 
@@ -17,6 +18,7 @@ enum Api {
   IsAccountExist = '/system/accountExist',
   DeptList = '/system/getDeptList',
   setRoleStatus = '/system/setRoleStatus',
+  MenuBuild = '/api/menus/build',
   MenuList = '/api/menus/tree',
   MenuListAll = '/api/menus/treeAll',
   Menu = '/api/menus',
@@ -30,6 +32,10 @@ export const getAccountList = (params: AccountParams) =>
 
 export const getDeptList = (params?: DeptListItem) =>
   defHttp.get<DeptListGetResultModel>({url: Api.DeptList, params});
+
+export const menuBuild = () => {
+  return defHttp.get<getMenuListResultModel>({ url: 'http://localhost:8000' + Api.MenuBuild });
+};
 
 export const getMenuList = (params?: MenuParams) => {
   return defHttp.get<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.MenuList, params});

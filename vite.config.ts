@@ -69,17 +69,18 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       target: 'es2015',
       cssTarget: 'chrome80',
       outDir: OUTPUT_DIR,
-      // minify: 'terser',
+       minify: 'terser',
       /**
        * 当 minify=“minify:'terser'” 解开注释
        * Uncomment when minify="minify:'terser'"
        */
-      // terserOptions: {
-      //   compress: {
-      //     keep_infinity: true,
-      //     drop_console: VITE_DROP_CONSOLE,
-      //   },
-      // },
+      terserOptions: {
+        compress: {
+          keep_infinity: true,
+          // 打包去掉console,debugger
+          drop_console: VITE_DROP_CONSOLE,
+        },
+      },
       reportCompressedSize: false,
       chunkSizeWarningLimit: 2000,
     },

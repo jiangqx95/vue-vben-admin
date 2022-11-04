@@ -138,6 +138,7 @@ function registerPromiseErrorHandler() {
  */
 function registerResourceErrorHandler() {
   // Monitoring resource loading error(img,script,css,and jsonp)
+  // 监视资源加载错误(img、script、css和jsonp)
   window.addEventListener(
     'error',
     function (e: Event) {
