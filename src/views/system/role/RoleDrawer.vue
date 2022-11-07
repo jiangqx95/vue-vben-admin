@@ -23,49 +23,12 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
-  import {BasicForm, FormSchema, useForm} from '/@/components/Form/index';
+  import {BasicForm, useForm} from '/@/components/Form/index';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { BasicTree, TreeItem } from '/@/components/Tree';
+  import {formSchema} from './role.data';
 
   import { getMenuListAll } from '/@/api/system/system';
-
-  const formSchema: FormSchema[] = [
-    {
-      field: 'name',
-      label: '角色名称',
-      required: true,
-      component: 'Input',
-    },
-    {
-      field: 'roleValue',
-      label: '角色值',
-      required: true,
-      component: 'Input',
-    },
-    {
-      field: 'status',
-      label: '状态',
-      component: 'RadioButtonGroup',
-      defaultValue: '0',
-      componentProps: {
-        options: [
-          { label: '启用', value: '0' },
-          { label: '停用', value: '1' },
-        ],
-      },
-    },
-    {
-      label: '备注',
-      field: 'remark',
-      component: 'InputTextArea',
-    },
-    {
-      label: ' ',
-      field: 'menu',
-      slot: 'menu',
-      component: 'Input',
-    },
-  ];
 
   export default defineComponent({
     name: 'RoleDrawer',

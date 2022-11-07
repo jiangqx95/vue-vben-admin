@@ -16,14 +16,17 @@ import {defHttp} from '/@/utils/http/axios';
 enum Api {
   AccountList = '/system/getAccountList',
   IsAccountExist = '/system/accountExist',
-  DeptList = '/system/getDeptList',
+  DeptList = '/api/dept',
   setRoleStatus = '/system/setRoleStatus',
+
+  Menu = '/api/menus',
   MenuBuild = '/api/menus/build',
   MenuList = '/api/menus/tree',
   MenuListAll = '/api/menus/treeAll',
-  Menu = '/api/menus',
+
   Role = '/api/roles',
   RolePageList = '/api/roles/all',
+
   GetAllRoleList = '/system/getAllRoleList',
 }
 
@@ -31,31 +34,25 @@ export const getAccountList = (params: AccountParams) =>
   defHttp.get<AccountListGetResultModel>({url: Api.AccountList, params});
 
 export const getDeptList = (params?: DeptListItem) =>
-  defHttp.get<DeptListGetResultModel>({url: Api.DeptList, params});
+  defHttp.get<DeptListGetResultModel>({url: 'http://localhost:8000' + Api.DeptList, params});
 
-export const menuBuild = () => {
-  return defHttp.get<getMenuListResultModel>({ url: 'http://localhost:8000' + Api.MenuBuild });
-};
+export const menuBuild = () =>
+  defHttp.get<getMenuListResultModel>({url: 'http://localhost:8000' + Api.MenuBuild});
 
-export const getMenuList = (params?: MenuParams) => {
-  return defHttp.get<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.MenuList, params});
-}
+export const getMenuList = (params?: MenuParams) =>
+  defHttp.get<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.MenuList, params});
 
-export const getMenuListAll = (params?: MenuParams) => {
-  return defHttp.get<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.MenuListAll, params});
-}
+export const getMenuListAll = (params) =>
+  defHttp.get<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.MenuListAll, params});
 
-export const updateMenu = (params?: MenuParams) => {
-  return defHttp.put<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.Menu, params});
-}
+export const updateMenu = (params?: MenuParams) =>
+  defHttp.put<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.Menu, params});
 
-export const deleteMenu = (params?: string[]) => {
-  return defHttp.delete<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.Menu, params});
-}
+export const deleteMenu = (params?: string[]) =>
+  defHttp.delete<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.Menu, params});
 
-export const addMenu = (params?: MenuParams) => {
-  return defHttp.post<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.Menu, params});
-}
+export const addMenu = (params?: MenuParams) =>
+  defHttp.post<MenuListGetResultModel>({url: 'http://localhost:8000' + Api.Menu, params});
 
 export const getRoleListByPage = (params?: RolePageParams) =>
   defHttp.get<RolePageListGetResultModel>({url: 'http://localhost:8000' + Api.RolePageList, params});

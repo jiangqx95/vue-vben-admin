@@ -32,73 +32,18 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent, h, toRaw} from 'vue';
+import {defineComponent, toRaw} from 'vue';
 
-import {BasicTable, useTable, TableAction, BasicColumn, FormSchema} from '/@/components/Table';
+import {BasicTable, useTable, TableAction} from '/@/components/Table';
 import {useDrawer} from '/@/components/Drawer';
 import MenuDrawer from './MenuDrawer.vue';
-import {Tag} from "ant-design-vue";
-import {Icon} from '/@/components/Icon';
+import {columns, searchFormSchema} from './menu.data';
+import {useMessage} from '/@/hooks/web/useMessage';
 
 // api
 import {getMenuListAll, deleteMenu} from '/@/api/system/system';
-import {useMessage} from '/@/hooks/web/useMessage';
 
 const {createMessage} = useMessage();
-
-// 列数据
-const columns: BasicColumn[] = [
-  {title: '菜单名称', dataIndex: 'title', align: 'left'},
-  {
-    title: '图标', dataIndex: 'icon', width: 50,
-    customRender: ({record}) => {
-      return h(Icon, {icon: record.icon});
-    }
-  },
-  {
-    title: '类型', dataIndex: 'type', width: 80,
-    customRender: ({record}) => {
-      const color = ['green', 'red', 'blue'];
-      const text = ['目录', '菜单', '按钮'];
-      return h(Tag, {color: color[record.type]}, () => text[record.type]);
-    }
-  },
-  {title: '权限标识', dataIndex: 'permission'},
-  {title: '组件', dataIndex: 'component'},
-  {title: '排序', dataIndex: 'menuSort', width: 50},
-  {
-    title: '状态', dataIndex: 'hidden', width: 80,
-    customRender: ({record}) => {
-      const hidden = record.hidden
-      const color = hidden ? 'red' : 'green';
-      const text = hidden ? '停用' : '启用';
-      return h(Tag, {color: color}, () => text);
-    }
-  },
-  {title: '创建时间', dataIndex: 'createTime'}
-];
-
-// 搜索表单
-const searchFormSchema: FormSchema[] = [
-  {
-    field: 'title',
-    label: '菜单名称',
-    component: 'Input',
-    colProps: {span: 8},
-  },
-  {
-    field: 'hidden',
-    label: '状态',
-    component: 'Select',
-    componentProps: {
-      options: [
-        {label: '启用', value: false},
-        {label: '停用', value: true},
-      ],
-    },
-    colProps: {span: 8},
-  },
-];
 
 export default defineComponent({
   name: 'MenuManagement',
@@ -107,7 +52,7 @@ export default defineComponent({
     const [registerDrawer, {openDrawer}] = useDrawer();
     const [registerTable, {reload}] = useTable({
       title: '菜单列表',
-      api: (title, hidden) => getMenuListAll(title, hidden),
+      api: (param) => getMenuListAll(param),
       columns,
       formConfig: {
         labelWidth: 120,
