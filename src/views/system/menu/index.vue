@@ -34,10 +34,11 @@
 <script lang="ts">
 import {defineComponent, toRaw} from 'vue';
 
+import {columns, searchFormSchema} from './menu.data';
 import {BasicTable, useTable, TableAction} from '/@/components/Table';
 import {useDrawer} from '/@/components/Drawer';
 import MenuDrawer from './MenuDrawer.vue';
-import {columns, searchFormSchema} from './menu.data';
+
 import {useMessage} from '/@/hooks/web/useMessage';
 
 // api

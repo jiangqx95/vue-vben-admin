@@ -48,13 +48,14 @@ export default defineComponent({
     const [registerModal, {openModal}] = useModal();
     const [registerTable, {reload}] = useTable({
       title: '部门列表',
-      api: () => getDeptList(),
+      api: (param) => getDeptList({param}),
       columns,
-      pagination: {pageSize: 10},
       formConfig: {
         labelWidth: 120,
         schemas: searchFormSchema,
       },
+      pagination: false,
+      isTreeTable: true,
       striped: false,
       useSearchForm: true,
       showTableSetting: true,

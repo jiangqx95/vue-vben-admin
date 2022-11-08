@@ -5,7 +5,7 @@ import {Tag} from 'ant-design-vue';
 import {Icon} from '/@/components/Icon';
 
 export const columns: BasicColumn[] = [
-  {title: '菜单名称', dataIndex: 'title', align: 'left'},
+  {title: '菜单名称', dataIndex: 'title', align: 'left', width: 150},
   {
     title: '图标', dataIndex: 'icon', width: 50,
     customRender: ({record}) => {
@@ -20,8 +20,8 @@ export const columns: BasicColumn[] = [
       return h(Tag, {color: color[record.type]}, () => text[record.type]);
     }
   },
-  {title: '权限标识', dataIndex: 'permission'},
-  {title: '组件', dataIndex: 'component'},
+  {title: '权限标识', dataIndex: 'permission', width: 150},
+  {title: '组件', dataIndex: 'component', width: 150},
   {title: '排序', dataIndex: 'menuSort', width: 50},
   {
     title: '状态', dataIndex: 'hidden', width: 80,
@@ -32,7 +32,7 @@ export const columns: BasicColumn[] = [
       return h(Tag, {color: color}, () => text);
     }
   },
-  {title: '创建时间', dataIndex: 'createTime'}
+  {title: '创建时间', dataIndex: 'createTime', width: 150}
 ];
 
 export const searchFormSchema: FormSchema[] = [
