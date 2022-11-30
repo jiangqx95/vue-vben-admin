@@ -24,12 +24,13 @@ export function configHtmlPlugin(env: ViteEnv, isBuild: boolean) {
         title: VITE_GLOB_APP_TITLE,
       },
       // Embed the generated app.config.js file
+      // 嵌入生成的app.config.js文件
       tags: isBuild
         ? [
             {
               tag: 'script',
               attrs: {
-                src: getAppConfigSrc(),
+                src: getAppConfigSrc()
               },
             },
           ]

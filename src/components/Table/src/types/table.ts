@@ -392,6 +392,7 @@ export interface BasicTableProps<T = any> {
 
   /**
    * Callback executed when the row expand icon is clicked
+   * 单击行展开图标时执行的回调
    *
    * @param expanded
    * @param record

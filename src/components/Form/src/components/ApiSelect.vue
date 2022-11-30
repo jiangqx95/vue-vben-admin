@@ -41,7 +41,7 @@
     },
     inheritAttrs: false,
     props: {
-      value: [Array, Object, String, Number, Boolean],
+      value: [Array, Object, Boolean, String, Number],
       numberToString: propTypes.bool,
       api: {
         type: Function as PropType<(arg?: Recordable) => Promise<OptionsItem[]>>,

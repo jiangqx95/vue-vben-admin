@@ -1,9 +1,8 @@
 <template>
   <div>
-    <BasicTable @register="registerTable">
+    <BasicTable @register="registerTable" @expand="expandCustomRow">
       <template #toolbar>
-        <a-button type="primary"
-                  @click="handleCreate"> 新增部门
+        <a-button type="primary" @click="handleCreate"> 新增部门
         </a-button>
       </template>
       <template #bodyCell="{ column, record }">
@@ -31,7 +30,7 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, onMounted, ref} from 'vue';
 
 import {columns, searchFormSchema} from './dept.data';
 import {BasicTable, useTable, TableAction} from '/@/components/Table';
@@ -45,10 +44,20 @@ export default defineComponent({
   name: 'DeptManagement',
   components: {BasicTable, DeptModal, TableAction},
   setup() {
+
+    onMounted(() => {
+      const a = getData(null);
+      console.log(a);
+      zidataSource.value =a
+    })
+
+    const zidataSource = ref([]);
+
     const [registerModal, {openModal}] = useModal();
     const [registerTable, {reload}] = useTable({
       title: '部门列表',
-      api: (param) => getDeptList({param}),
+      // api: (param) => getDeptList(param),
+      dataSource: zidataSource,
       columns,
       formConfig: {
         labelWidth: 120,
@@ -56,6 +65,7 @@ export default defineComponent({
       },
       pagination: false,
       isTreeTable: true,
+      childrenColumnName: 'hasChildren',
       striped: false,
       useSearchForm: true,
       showTableSetting: true,
@@ -70,6 +80,48 @@ export default defineComponent({
         fixed: undefined,
       },
     });
+
+    function expandCustomRow(expanded, record) {
+      if (!expanded) {
+        return
+      }
+      const res = getData(record.id);
+      if (res.code === '0') {
+        const children = res.result.items || []
+        // children.forEach((opt) => {
+        //   // 如果children为空 不显示展开icon
+        //   try {
+        //     if (opt.children.length === 0) {
+        //       delete opt.children
+        //     }
+        //   } catch (err) {}
+        // })
+        // 如果数据有children字段，就不需要下面这句
+        // children.forEach((item) => {
+        //   item.children = []
+        // })
+        const dataSourceMap = (items) => {
+          items.find((item) => {
+            if (item.id === id) {
+              //找到当前要展开的节点
+              item.children = children
+              return items
+            }
+            if (item.children && item.children.length > 0) {
+              dataSourceMap(item.children)
+            }
+          })
+        }
+        const data = zidataSource.value;
+        dataSourceMap(data || [])
+        zidataSource.value = data
+        console.log(zidataSource.value);
+      }
+    }
+
+     async function getData(pid: string) {
+      return await getDeptList({pid: pid})
+    }
 
     function handleCreate() {
       openModal(true, {
@@ -99,6 +151,8 @@ export default defineComponent({
       handleEdit,
       handleDelete,
       handleSuccess,
+      getData,
+      expandCustomRow
     };
   },
 });
