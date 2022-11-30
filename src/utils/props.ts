@@ -88,7 +88,7 @@ export type BuildPropReturn<T, D, R, V, C> = {
     values: ['small', 'medium'],
     validator: (val: unknown): val is number => typeof val === 'number',
   } as const)
-  @link see more: https://github.com/element-plus/element-plus/pull/3341
+  @link https://github.com/element-plus/element-plus/pull/3341
  */
 export function buildProp<
   T = never,
@@ -128,9 +128,11 @@ export function buildProp<
         }
       : undefined;
 
+
   return {
     type:
       typeof type === 'object' && Object.getOwnPropertySymbols(type).includes(wrapperKey)
+        // @ts-ignore
         ? type[wrapperKey]
         : type,
     required: !!required,
@@ -176,9 +178,10 @@ export const buildProps = <
       : never;
   };
 
-export const definePropType = <T>(val: any) => ({ [wrapperKey]: val } as PropWrapper<T>);
+// export const definePropType = <T>(val: any) => ({ [wrapperKey]: val } as PropWrapper<T>);
 
-export const keyOf = <T>(arr: T) => Object.keys(arr) as Array<keyof T>;
+// @ts-ignore
+// export const keyOf = <T>(arr: T) => Object.keys(arr) as Array<keyof T>;
 export const mutable = <T extends readonly any[] | Record<string, unknown>>(val: T) =>
   val as Mutable<typeof val>;
 
