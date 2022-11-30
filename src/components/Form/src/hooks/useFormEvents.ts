@@ -93,10 +93,7 @@ export function useFormEvents({
       } else {
         nestKeyArray.forEach((nestKey: string) => {
           try {
-            const value = eval('values' + delimiter + nestKey);
-            console.log(value);
-            const value2 = JSON.parse('values' + delimiter + nestKey);
-            console.log(value2);
+            const value = nestKey.split('.').reduce((out, item) => out[item], values);
             if (isDef(value)) {
               formModel[nestKey] = value;
               validKeys.push(nestKey);
